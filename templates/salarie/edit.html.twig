@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ salarie.prenom }} {{ salarie.nom }}{% endblock %}
+{% block page_class %}page-etroite{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_salarie_show', {'id': salarie.id}) }}" class="retour">← Retour à la fiche</a>
+    <h1>Modifier le salarié</h1>
+
+    {{ include('salarie/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+
+    <div class="actions">
+        {{ include('salarie/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Amset{% endblock %} — Amset</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231f7a4d%22/><text x=%2216%22 y=%2223%22 font-size=%2220%22 font-family=%22Arial%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>A</text></svg>">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+        {% block stylesheets %}{% endblock %}
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-
-        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphp_hot_reload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% set route = app.request.attributes.get('_route') %}
+        <header class="header">
+            <div class="header-gauche">
+                <a href="{{ path('app_salarie_index') }}" class="logo">
+                    <span class="logo-carre">A</span>
+                    <span class="logo-nom">Amset</span>
+                    <span class="logo-sous-titre">Gestion des salariés</span>
+                </a>
+                <nav class="nav">
+                    <a href="{{ path('app_salarie_index') }}" class="{{ route starts with 'app_salarie' ? 'actif' }}">Salariés</a>
+                    <a href="#" class="{{ route == 'app_recherche' ? 'actif' }}">Recherche</a>
+                </nav>
+            </div>
+            {# Sélecteur de langue : sera branché avec la traduction #}
+            <div class="langues">
+                <a href="#" class="actif">FR</a>
+                <a href="#">EN</a>
+            </div>
+        </header>
+
+        <main class="page {% block page_class %}{% endblock %}">
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

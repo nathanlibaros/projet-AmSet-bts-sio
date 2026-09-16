@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau salarié{% endblock %}
+{% block page_class %}page-etroite{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_salarie_index') }}" class="retour">← Retour à la liste</a>
+    <h1>Nouveau salarié</h1>
+
+    {{ include('salarie/_form.html.twig') }}
+{% endblock %}

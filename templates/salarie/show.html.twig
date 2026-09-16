@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ salarie.prenom }} {{ salarie.nom }}{% endblock %}
+{% block page_class %}page-etroite{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_salarie_index') }}" class="retour">← Retour à la liste</a>
+
+    <div class="fiche-entete">
+        <div class="fiche-identite">
+            <div class="avatar">{{ salarie.prenom|first|upper }}{{ salarie.nom|first|upper }}</div>
+            <div>
+                <h1>{{ salarie.civilite == 'Madame' ? 'Mme' : 'M.' }} {{ salarie.prenom }} {{ salarie.nom }}</h1>
+                <p class="sous-titre">Site de {{ salarie.site ? salarie.site.nom }}</p>
+            </div>
+        </div>
+        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn btn-vert">Modifier</a>
+    </div>
+
+    <div class="grille-2">
+        <section class="carte">
+            <h2>Coordonnées</h2>
+            <div class="infos">
+                <div class="info"><span class="info-label">Email</span><span>{{ salarie.email }}</span></div>
+                <div class="info"><span class="info-label">Téléphone</span><span>{{ salarie.telephone ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">Adresse</span><span>{{ salarie.adresse ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">Code postal</span><span>{{ salarie.codePostal ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">Ville</span><span>{{ salarie.ville ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">Site</span><span>{{ salarie.site ? salarie.site.nom }}</span></div>
+            </div>
+        </section>
+
+        <section class="carte">
+            <h2>Compétences</h2>
+            <div class="pastilles">
+                {% for competence in salarie.competences %}
+                    <span class="pastille pastille-grande">{{ competence.libelle }}</span>
+                {% else %}
+                    <span class="discret">Aucune compétence renseignée.</span>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <div class="actions">
+        {{ include('salarie/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

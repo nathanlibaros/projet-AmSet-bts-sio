@@ -1,0 +1,45 @@
+{{ form_start(form) }}
+    <section class="carte">
+        <h2>Identité</h2>
+        <div class="form-grille">
+            <div class="champ pleine-largeur">
+                {{ form_label(form.civilite) }}
+                <div class="choix">
+                    {% for choix in form.civilite %}
+                        <div>{{ form_widget(choix) }}{{ form_label(choix) }}</div>
+                    {% endfor %}
+                </div>
+                {{ form_errors(form.civilite) }}
+            </div>
+            <div class="champ">{{ form_label(form.nom) }}{{ form_widget(form.nom) }}{{ form_errors(form.nom) }}</div>
+            <div class="champ">{{ form_label(form.prenom) }}{{ form_widget(form.prenom) }}{{ form_errors(form.prenom) }}</div>
+            <div class="champ">{{ form_label(form.email) }}{{ form_widget(form.email) }}{{ form_errors(form.email) }}</div>
+            <div class="champ">{{ form_label(form.telephone) }}{{ form_widget(form.telephone) }}{{ form_errors(form.telephone) }}</div>
+        </div>
+
+        <h2>Adresse</h2>
+        <div class="form-grille form-grille-3">
+            <div class="champ pleine-largeur">{{ form_label(form.adresse) }}{{ form_widget(form.adresse) }}{{ form_errors(form.adresse) }}</div>
+            <div class="champ">{{ form_label(form.codePostal) }}{{ form_widget(form.codePostal) }}{{ form_errors(form.codePostal) }}</div>
+            <div class="champ">{{ form_label(form.ville) }}{{ form_widget(form.ville) }}{{ form_errors(form.ville) }}</div>
+            <div class="champ">{{ form_label(form.site) }}{{ form_widget(form.site) }}{{ form_errors(form.site) }}</div>
+        </div>
+
+        <h2>Compétences</h2>
+        <div class="champ">
+            <div class="choix choix-grille">
+                {% for choix in form.competences %}
+                    <div>{{ form_widget(choix) }}{{ form_label(choix) }}</div>
+                {% endfor %}
+            </div>
+            {{ form_errors(form.competences) }}
+        </div>
+    </section>
+
+    {{ form_rest(form) }}
+
+    <div class="actions" style="margin-top: 24px;">
+        <a href="{{ path('app_salarie_index') }}" class="btn btn-blanc">Annuler</a>
+        <button class="btn btn-vert">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}
