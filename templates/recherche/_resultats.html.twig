@@ -1,0 +1,49 @@
+<div class="resume-resultats">
+    <span class="fort">{{ salaries|length }} résultat{{ salaries|length > 1 ? 's' }}</span>
+</div>
+
+<div class="tableau-conteneur">
+    <table class="tableau" data-sortable>
+        <thead>
+            <tr>
+                <th data-sort>Nom</th>
+                <th data-sort>Prénom</th>
+                <th data-sort>Email</th>
+                <th data-sort>Site</th>
+                <th data-sort>Compétences</th>
+                <th class="col-actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salarie in salaries %}
+            <tr data-row>
+                <td class="fort">{{ salarie.nom }}</td>
+                <td>{{ salarie.prenom }}</td>
+                <td class="discret">{{ salarie.email }}</td>
+                <td>{{ salarie.site ? salarie.site.nom }}</td>
+                <td>
+                    <div class="pastilles">
+                        {% for competence in salarie.competences %}
+                            <span class="pastille">{{ competence.libelle }}</span>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td class="col-actions">
+                    <div>
+                        <a href="{{ path('app_salarie_show', {'id': salarie.id}) }}" class="btn-icone" title="Voir">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8Z"/><circle cx="8" cy="8" r="2"/></svg>
+                        </a>
+                        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn-icone" title="Modifier">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 2.5l3 3L6 13H3v-3l7.5-7.5Z"/></svg>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="vide">Aucun salarié ne correspond à ces critères.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

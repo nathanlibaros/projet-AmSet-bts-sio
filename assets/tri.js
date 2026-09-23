@@ -2,8 +2,13 @@
  * Tri des tableaux côté client (sans rechargement de la page).
  * Utilisation : <table data-sortable> et <th data-sort> sur les colonnes triables.
  */
-document.addEventListener('DOMContentLoaded', () => {
+function activerTri() {
     document.querySelectorAll('table[data-sortable]').forEach((table) => {
+        if (table.dataset.triActif) {
+            return;
+        }
+        table.dataset.triActif = '1';
+
         const headers = table.querySelectorAll('th[data-sort]');
 
         headers.forEach((th) => {
@@ -29,4 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-});
+}
+
+document.addEventListener('DOMContentLoaded', activerTri);
+// Après une mise à jour des résultats de recherche (AJAX).
+document.addEventListener('tableaux:maj', activerTri);

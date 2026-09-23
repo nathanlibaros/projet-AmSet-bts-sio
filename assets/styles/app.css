@@ -182,3 +182,20 @@ table.tableau { width: 100%; border-collapse: collapse; }
 .choix input { accent-color: var(--vert); width: 18px; height: 18px; margin: 0; }
 .choix label { font-weight: 400; font-size: 14px; color: var(--texte); }
 .champ ul { margin: 0; padding: 0; list-style: none; color: var(--rouge); font-size: 13px; }
+
+/* ----- Page de recherche ----- */
+.recherche { display: flex; gap: 28px; align-items: flex-start; }
+.filtres { width: 300px; flex-shrink: 0; padding: 24px; }
+.filtres form { display: flex; flex-direction: column; gap: 22px; }
+.filtres select { width: 100%; }
+.titre-champ { font-size: 13px; font-weight: 600; color: #34403a; }
+.choix-colonne { display: flex; flex-direction: column; gap: 12px; }
+.lien-reset {
+    align-self: flex-start;
+    background: none; border: none; padding: 0;
+    font: inherit; font-size: 13px; font-weight: 500;
+    color: var(--vert); cursor: pointer;
+}
+.lien-reset:hover { color: var(--vert-fonce); text-decoration: underline; }
+.resultats-zone { flex-grow: 1; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.resume-resultats { font-size: 14px; }
