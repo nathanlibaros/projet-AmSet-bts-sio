@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Recherche de salariés{% endblock %}
+{% block title %}{{ 'recherche.titre'|trans }}{% endblock %}
 
 {% block body %}
     <div class="recherche">
         <aside class="carte filtres">
-            <h2>Filtres</h2>
+            <h2>{{ 'recherche.filtres'|trans }}</h2>
 
-            <form id="form-recherche" data-url="{{ path('app_recherche_resultats') }}">
+            <form id="form-recherche" data-url="{{ path('app_recherche_resultats') }}" data-erreur="{{ 'recherche.erreur'|trans }}">
                 <div class="champ">
-                    <label for="filtre-site">Site</label>
+                    <label for="filtre-site">{{ 'champ.site'|trans }}</label>
                     <select id="filtre-site" name="site">
-                        <option value="">Tous les sites</option>
+                        <option value="">{{ 'recherche.tous_les_sites'|trans }}</option>
                         {% for site in sites %}
                             <option value="{{ site.id }}" {{ site.id == site_choisi ? 'selected' }}>{{ site.nom }}</option>
                         {% endfor %}
@@ -19,26 +19,26 @@
                 </div>
 
                 <div class="champ">
-                    <span class="titre-champ">Compétences</span>
+                    <span class="titre-champ">{{ 'champ.competences'|trans }}</span>
                     <div class="choix choix-colonne">
                         {% for competence in competences %}
                             <div>
                                 <input type="checkbox" id="comp-{{ competence.id }}" name="competences[]" value="{{ competence.id }}"
                                        {{ competence.id in competences_choisies ? 'checked' }}>
-                                <label for="comp-{{ competence.id }}">{{ competence.libelle }}</label>
+                                <label for="comp-{{ competence.id }}">{{ competence.libelleTraduit(app.request.locale) }}</label>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
 
-                <button type="reset" class="lien-reset">Réinitialiser les filtres</button>
+                <button type="reset" class="lien-reset">{{ 'recherche.reinitialiser'|trans }}</button>
             </form>
         </aside>
 
         <section class="resultats-zone">
             <div>
-                <h1>Recherche de salariés</h1>
-                <p class="sous-titre">Les résultats se mettent à jour à chaque changement de filtre.</p>
+                <h1>{{ 'recherche.titre'|trans }}</h1>
+                <p class="sous-titre">{{ 'recherche.sous_titre'|trans }}</p>
             </div>
 
             <div id="resultats">

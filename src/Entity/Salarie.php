@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SalarieRepository::class)]
 #[ORM\Table(name: 'salarie')]
-#[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé par un autre salarié.')]
+#[UniqueEntity(fields: ['email'], message: 'salarie.email_deja_utilise')]
 class Salarie
 {
     public const CIVILITES = ['Monsieur', 'Madame'];

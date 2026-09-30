@@ -1,0 +1,70 @@
+app:
+    nom: Amset
+    sous_titre: Gestion des salariés
+
+nav:
+    salaries: Salariés
+    recherche: Recherche
+
+table:
+    civilite: Civilité
+    nom: Nom
+    prenom: Prénom
+    email: Email
+    site: Site
+    competences: Compétences
+    actions: Actions
+    aucun_salarie: Aucun salarié enregistré.
+
+champ:
+    civilite: Civilité
+    nom: Nom
+    prenom: Prénom
+    email: Email
+    telephone: Téléphone
+    adresse: Adresse
+    code_postal: Code postal
+    ville: Ville
+    site: Site
+    competences: Compétences
+    choisir_site: Choisir un site
+
+civilite:
+    monsieur: Monsieur
+    madame: Madame
+    abrege_monsieur: M.
+    abrege_madame: Mme
+
+action:
+    voir: Voir
+    modifier: Modifier
+    supprimer: Supprimer le salarié
+    retour_liste: Retour à la liste
+    retour_fiche: Retour à la fiche
+    annuler: Annuler
+    enregistrer: Enregistrer
+    enregistrer_modifs: Enregistrer les modifications
+    confirmer_suppression: Voulez-vous vraiment supprimer ce salarié ?
+
+salarie:
+    titre: Salariés
+    aide_tri: Cliquez sur un titre de colonne pour trier la liste.
+    nouveau: Nouveau salarié
+    titre_nouveau: Nouveau salarié
+    titre_modifier: Modifier le salarié
+    bloc_identite: Identité
+    bloc_adresse: Adresse
+    bloc_competences: Compétences
+    bloc_coordonnees: Coordonnées
+    site_de: 'Site de %site%'
+    aucune_competence: Aucune compétence renseignée.
+
+recherche:
+    titre: Recherche de salariés
+    sous_titre: Les résultats se mettent à jour à chaque changement de filtre.
+    filtres: Filtres
+    tous_les_sites: Tous les sites
+    reinitialiser: Réinitialiser les filtres
+    aucun_resultat: Aucun salarié ne correspond à ces critères.
+    erreur: Impossible de charger les résultats.
+    resultats: '{0}Aucun résultat|{1}%count% résultat|]1,Inf[ %count% résultats'

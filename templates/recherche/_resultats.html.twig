@@ -1,17 +1,17 @@
 <div class="resume-resultats">
-    <span class="fort">{{ salaries|length }} résultat{{ salaries|length > 1 ? 's' }}</span>
+    <span class="fort">{{ 'recherche.resultats'|trans({'%count%': salaries|length}) }}</span>
 </div>
 
 <div class="tableau-conteneur">
     <table class="tableau" data-sortable>
         <thead>
             <tr>
-                <th data-sort>Nom</th>
-                <th data-sort>Prénom</th>
-                <th data-sort>Email</th>
-                <th data-sort>Site</th>
-                <th data-sort>Compétences</th>
-                <th class="col-actions">Actions</th>
+                <th data-sort>{{ 'table.nom'|trans }}</th>
+                <th data-sort>{{ 'table.prenom'|trans }}</th>
+                <th data-sort>{{ 'table.email'|trans }}</th>
+                <th data-sort>{{ 'table.site'|trans }}</th>
+                <th data-sort>{{ 'table.competences'|trans }}</th>
+                <th class="col-actions">{{ 'table.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,16 +24,16 @@
                 <td>
                     <div class="pastilles">
                         {% for competence in salarie.competences %}
-                            <span class="pastille">{{ competence.libelle }}</span>
+                            <span class="pastille">{{ competence.libelleTraduit(app.request.locale) }}</span>
                         {% endfor %}
                     </div>
                 </td>
                 <td class="col-actions">
                     <div>
-                        <a href="{{ path('app_salarie_show', {'id': salarie.id}) }}" class="btn-icone" title="Voir">
+                        <a href="{{ path('app_salarie_show', {'id': salarie.id}) }}" class="btn-icone" title="{{ 'action.voir'|trans }}">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8Z"/><circle cx="8" cy="8" r="2"/></svg>
                         </a>
-                        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn-icone" title="Modifier">
+                        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn-icone" title="{{ 'action.modifier'|trans }}">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 2.5l3 3L6 13H3v-3l7.5-7.5Z"/></svg>
                         </a>
                     </div>
@@ -41,7 +41,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6" class="vide">Aucun salarié ne correspond à ces critères.</td>
+                <td colspan="6" class="vide">{{ 'recherche.aucun_resultat'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

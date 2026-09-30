@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // On garde les filtres dans l'adresse, pour pouvoir partager le lien.
             window.history.replaceState(null, '', params.toString() ? '?' + params : location.pathname);
         } catch (e) {
-            zone.innerHTML = '<div class="tableau-conteneur"><p class="vide">Impossible de charger les résultats.</p></div>';
+            const message = form.dataset.erreur || 'Erreur';
+            zone.innerHTML = '<div class="tableau-conteneur"><p class="vide">' + message + '</p></div>';
         }
     };
 

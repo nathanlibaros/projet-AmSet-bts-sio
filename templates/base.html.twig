@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Amset{% endblock %} — Amset</title>
+        <title>{% block title %}{{ 'app.nom'|trans }}{% endblock %} — {{ 'app.nom'|trans }}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231f7a4d%22/><text x=%2216%22 y=%2223%22 font-size=%2220%22 font-family=%22Arial%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22>A</text></svg>">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
@@ -14,22 +14,28 @@
     </head>
     <body>
         {% set route = app.request.attributes.get('_route') %}
+        {% set params = app.request.attributes.get('_route_params')|default({}) %}
         <header class="header">
             <div class="header-gauche">
-                <a href="{{ path('app_salarie_index') }}" class="logo">
+                <a href="{{ path('app_salarie_index', {'_locale': app.request.locale}) }}" class="logo">
                     <span class="logo-carre">A</span>
-                    <span class="logo-nom">Amset</span>
-                    <span class="logo-sous-titre">Gestion des salariés</span>
+                    <span class="logo-nom">{{ 'app.nom'|trans }}</span>
+                    <span class="logo-sous-titre">{{ 'app.sous_titre'|trans }}</span>
                 </a>
                 <nav class="nav">
-                    <a href="{{ path('app_salarie_index') }}" class="{{ route starts with 'app_salarie' ? 'actif' }}">Salariés</a>
-                    <a href="{{ path('app_recherche') }}" class="{{ route starts with 'app_recherche' ? 'actif' }}">Recherche</a>
+                    <a href="{{ path('app_salarie_index', {'_locale': app.request.locale}) }}"
+                       class="{{ route starts with 'app_salarie' ? 'actif' }}">{{ 'nav.salaries'|trans }}</a>
+                    <a href="{{ path('app_recherche', {'_locale': app.request.locale}) }}"
+                       class="{{ route starts with 'app_recherche' ? 'actif' }}">{{ 'nav.recherche'|trans }}</a>
                 </nav>
             </div>
-            {# Sélecteur de langue : sera branché avec la traduction #}
+
+            {# Sélecteur de langue : on reste sur la même page, en changeant _locale #}
             <div class="langues">
-                <a href="#" class="actif">FR</a>
-                <a href="#">EN</a>
+                {% for langue in ['fr', 'en'] %}
+                    <a href="{{ path(route, params|merge({'_locale': langue})) }}"
+                       class="{{ app.request.locale == langue ? 'actif' }}">{{ langue|upper }}</a>
+                {% endfor %}
             </div>
         </header>
 

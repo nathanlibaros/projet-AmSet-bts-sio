@@ -11,35 +11,47 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SalarieType extends AbstractType
 {
+    public function __construct(private readonly RequestStack $requestStack)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $langue = $this->requestStack->getCurrentRequest()?->getLocale() ?? 'fr';
+
         $builder
             ->add('civilite', ChoiceType::class, [
-                'label' => 'Civilité',
-                'choices' => ['Monsieur' => 'Monsieur', 'Madame' => 'Madame'],
+                'label' => 'champ.civilite',
+                // La valeur enregistrée reste en français (contrainte de la base),
+                // seul le libellé affiché est traduit.
+                'choices' => ['civilite.monsieur' => 'Monsieur', 'civilite.madame' => 'Madame'],
                 'expanded' => true,
             ])
-            ->add('nom', null, ['label' => 'Nom'])
-            ->add('prenom', null, ['label' => 'Prénom'])
-            ->add('email', EmailType::class, ['label' => 'Email'])
-            ->add('telephone', TelType::class, ['label' => 'Téléphone', 'required' => false])
-            ->add('adresse', null, ['label' => 'Adresse'])
-            ->add('codePostal', null, ['label' => 'Code postal'])
-            ->add('ville', null, ['label' => 'Ville'])
+            ->add('nom', null, ['label' => 'champ.nom'])
+            ->add('prenom', null, ['label' => 'champ.prenom'])
+            ->add('email', EmailType::class, ['label' => 'champ.email'])
+            ->add('telephone', TelType::class, ['label' => 'champ.telephone', 'required' => false])
+            ->add('adresse', null, ['label' => 'champ.adresse'])
+            ->add('codePostal', null, ['label' => 'champ.code_postal'])
+            ->add('ville', null, ['label' => 'champ.ville'])
             ->add('site', EntityType::class, [
-                'label' => 'Site',
+                'label' => 'champ.site',
                 'class' => Site::class,
                 'choice_label' => 'nom',
-                'placeholder' => 'Choisir un site',
+                'choice_translation_domain' => false,
+                'placeholder' => 'champ.choisir_site',
             ])
             ->add('competences', EntityType::class, [
-                'label' => 'Compétences',
+                'label' => 'champ.competences',
                 'class' => Competence::class,
-                'choice_label' => 'libelle',
+                // Libellé affiché dans la langue courante du site
+                'choice_label' => fn (Competence $competence) => $competence->getLibelleTraduit($langue),
+                'choice_translation_domain' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,

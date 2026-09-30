@@ -10,12 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/{_locale}/recherche', requirements: ['_locale' => 'fr|en'])]
 class RechercheController extends AbstractController
 {
     /**
      * Page de recherche : formulaire de filtres + première liste de résultats.
      */
-    #[Route('/recherche', name: 'app_recherche', methods: ['GET'])]
+    #[Route('', name: 'app_recherche', methods: ['GET'])]
     public function index(
         Request $request,
         SalarieRepository $salarieRepository,
@@ -37,7 +38,7 @@ class RechercheController extends AbstractController
      * Résultats seuls, appelés en AJAX à chaque changement de filtre
      * (pas de rechargement de la page).
      */
-    #[Route('/recherche/resultats', name: 'app_recherche_resultats', methods: ['GET'])]
+    #[Route('/resultats', name: 'app_recherche_resultats', methods: ['GET'])]
     public function resultats(Request $request, SalarieRepository $salarieRepository): Response
     {
         [$siteId, $competenceIds] = $this->criteres($request);
@@ -54,10 +55,11 @@ class RechercheController extends AbstractController
      */
     private function criteres(Request $request): array
     {
-        $siteId = $request->query->getInt('site') ?: null;
+        // On lit les valeurs en texte : le champ "Tous les sites" envoie une valeur vide.
+        $siteId = (int) $request->query->get('site', '') ?: null;
 
         $competenceIds = array_values(array_filter(array_map(
-            'intval',
+            static fn ($valeur) => (int) $valeur,
             (array) $request->query->all('competences')
         )));
 

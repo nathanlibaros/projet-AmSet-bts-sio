@@ -4,39 +4,39 @@
 {% block page_class %}page-etroite{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_salarie_index') }}" class="retour">← Retour à la liste</a>
+    <a href="{{ path('app_salarie_index') }}" class="retour">← {{ 'action.retour_liste'|trans }}</a>
 
     <div class="fiche-entete">
         <div class="fiche-identite">
             <div class="avatar">{{ salarie.prenom|first|upper }}{{ salarie.nom|first|upper }}</div>
             <div>
-                <h1>{{ salarie.civilite == 'Madame' ? 'Mme' : 'M.' }} {{ salarie.prenom }} {{ salarie.nom }}</h1>
-                <p class="sous-titre">Site de {{ salarie.site ? salarie.site.nom }}</p>
+                <h1>{{ (salarie.civilite == 'Madame' ? 'civilite.abrege_madame' : 'civilite.abrege_monsieur')|trans }} {{ salarie.prenom }} {{ salarie.nom }}</h1>
+                <p class="sous-titre">{{ 'salarie.site_de'|trans({'%site%': salarie.site ? salarie.site.nom : '—'}) }}</p>
             </div>
         </div>
-        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn btn-vert">Modifier</a>
+        <a href="{{ path('app_salarie_edit', {'id': salarie.id}) }}" class="btn btn-vert">{{ 'action.modifier'|trans }}</a>
     </div>
 
     <div class="grille-2">
         <section class="carte">
-            <h2>Coordonnées</h2>
+            <h2>{{ 'salarie.bloc_coordonnees'|trans }}</h2>
             <div class="infos">
-                <div class="info"><span class="info-label">Email</span><span>{{ salarie.email }}</span></div>
-                <div class="info"><span class="info-label">Téléphone</span><span>{{ salarie.telephone ?: '—' }}</span></div>
-                <div class="info"><span class="info-label">Adresse</span><span>{{ salarie.adresse ?: '—' }}</span></div>
-                <div class="info"><span class="info-label">Code postal</span><span>{{ salarie.codePostal ?: '—' }}</span></div>
-                <div class="info"><span class="info-label">Ville</span><span>{{ salarie.ville ?: '—' }}</span></div>
-                <div class="info"><span class="info-label">Site</span><span>{{ salarie.site ? salarie.site.nom }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.email'|trans }}</span><span>{{ salarie.email }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.telephone'|trans }}</span><span>{{ salarie.telephone ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.adresse'|trans }}</span><span>{{ salarie.adresse ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.code_postal'|trans }}</span><span>{{ salarie.codePostal ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.ville'|trans }}</span><span>{{ salarie.ville ?: '—' }}</span></div>
+                <div class="info"><span class="info-label">{{ 'champ.site'|trans }}</span><span>{{ salarie.site ? salarie.site.nom }}</span></div>
             </div>
         </section>
 
         <section class="carte">
-            <h2>Compétences</h2>
+            <h2>{{ 'salarie.bloc_competences'|trans }}</h2>
             <div class="pastilles">
                 {% for competence in salarie.competences %}
-                    <span class="pastille pastille-grande">{{ competence.libelle }}</span>
+                    <span class="pastille pastille-grande">{{ competence.libelleTraduit(app.request.locale) }}</span>
                 {% else %}
-                    <span class="discret">Aucune compétence renseignée.</span>
+                    <span class="discret">{{ 'salarie.aucune_competence'|trans }}</span>
                 {% endfor %}
             </div>
         </section>

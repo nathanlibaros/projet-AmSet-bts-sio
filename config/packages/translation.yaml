@@ -1,5 +1,9 @@
 framework:
-    default_locale: en
+    default_locale: fr
+    # Langues proposées par le site. Pour en ajouter une (ex: espagnol),
+    # il suffit d'ajouter son code ici et de créer translations/messages.es.yaml
+    enabled_locales: ['fr', 'en']
     translator:
         default_path: '%kernel.project_dir%/translations'
-        providers:
+        fallbacks:
+            - fr

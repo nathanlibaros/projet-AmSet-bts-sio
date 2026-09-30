@@ -1,4 +1,5 @@
-<form method="post" action="{{ path('app_salarie_delete', {'id': salarie.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce salarié ?');">
+<form method="post" action="{{ path('app_salarie_delete', {'id': salarie.id}) }}"
+      onsubmit="return confirm('{{ 'action.confirmer_suppression'|trans|e('js') }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ salarie.id) }}">
-    <button class="btn btn-rouge">Supprimer le salarié</button>
+    <button class="btn btn-rouge">{{ 'action.supprimer'|trans }}</button>
 </form>

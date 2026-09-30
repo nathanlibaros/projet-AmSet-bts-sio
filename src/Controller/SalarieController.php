@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/salarie')]
+#[Route('/{_locale}/salarie', requirements: ['_locale' => 'fr|en'])]
 final class SalarieController extends AbstractController
 {
     #[Route(name: 'app_salarie_index', methods: ['GET'])]

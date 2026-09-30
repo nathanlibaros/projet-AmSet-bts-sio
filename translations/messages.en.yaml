@@ -1,0 +1,70 @@
+app:
+    nom: Amset
+    sous_titre: Employee management
+
+nav:
+    salaries: Employees
+    recherche: Search
+
+table:
+    civilite: Title
+    nom: Last name
+    prenom: First name
+    email: Email
+    site: Office
+    competences: Skills
+    actions: Actions
+    aucun_salarie: No employee registered.
+
+champ:
+    civilite: Title
+    nom: Last name
+    prenom: First name
+    email: Email
+    telephone: Phone
+    adresse: Address
+    code_postal: Postcode
+    ville: City
+    site: Office
+    competences: Skills
+    choisir_site: Choose an office
+
+civilite:
+    monsieur: Mister
+    madame: Madam
+    abrege_monsieur: Mr
+    abrege_madame: Mrs
+
+action:
+    voir: View
+    modifier: Edit
+    supprimer: Delete employee
+    retour_liste: Back to list
+    retour_fiche: Back to profile
+    annuler: Cancel
+    enregistrer: Save
+    enregistrer_modifs: Save changes
+    confirmer_suppression: Do you really want to delete this employee?
+
+salarie:
+    titre: Employees
+    aide_tri: Click a column heading to sort the list.
+    nouveau: New employee
+    titre_nouveau: New employee
+    titre_modifier: Edit employee
+    bloc_identite: Identity
+    bloc_adresse: Address
+    bloc_competences: Skills
+    bloc_coordonnees: Contact details
+    site_de: '%site% office'
+    aucune_competence: No skill registered.
+
+recherche:
+    titre: Employee search
+    sous_titre: Results update automatically whenever a filter changes.
+    filtres: Filters
+    tous_les_sites: All offices
+    reinitialiser: Reset filters
+    aucun_resultat: No employee matches these criteria.
+    erreur: Results could not be loaded.
+    resultats: '{0}No result|{1}%count% result|]1,Inf[ %count% results'
